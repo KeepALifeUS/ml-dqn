@@ -1,75 +1,74 @@
-# ML-DQN: Enterprise Deep Q-Network для Криптотрейдинга
+# ML-DQN: Enterprise Deep Q-Network for Crypto Trading
 
-> **Production-Ready DQN Implementation с Context7 Enterprise Паттернами**
+> **Production-Ready DQN Implementation with Enterprise Patterns**
 
-Комплексная реализация Deep Q-Network (DQN) и его улучшений для криптотрейдинга с enterprise-grade функциональностью, включающая все современные достижения в области Deep Reinforcement Learning.
+Comprehensive Deep Q-Network (DQN) implementation and its improvements for cryptocurrency trading with enterprise-grade functionality, including all modern advances in Deep Reinforcement Learning.
 
-## 🚀 Особенности
+## Features
 
-### 🧠 DQN Algorithms
+### DQN Algorithms
 
-- **🎯 Core DQN** - Базовая реализация с epsilon-greedy exploration
-- **🔄 Double DQN** - Устранение overestimation bias через decoupled selection/evaluation
-- **⚔️ Dueling DQN** - Разделение value и advantage потоков
-- **🎛️ Noisy Networks** - Parameter space exploration без epsilon decay
-- **🌈 Rainbow DQN** - Объединение всех улучшений в state-of-the-art решение
+- **Core DQN** - Basic implementation with epsilon-greedy exploration
+- **Double DQN** - Eliminates overestimation bias through decoupled selection/evaluation
+- **Dueling DQN** - Separates value and advantage streams
+- **Noisy Networks** - Parameter space exploration without epsilon decay
+- **Rainbow DQN** - Combines all improvements into state-of-the-art solution
 
-### 📊 Experience Replay Systems
+### Experience Replay Systems
 
-- **🔄 Standard Replay Buffer** - Efficient circular buffer с O(1) operations
-- **⭐ Prioritized Experience Replay** - Sum-tree based sampling с importance weights
-- **🧠 Multi-step Returns** - N-step bootstrapping для better credit assignment
-- **🎯 Distributional DQN** - Categorical value distributions для uncertainty modeling
+- **Standard Replay Buffer** - Efficient circular buffer with O(1) operations
+- **Prioritized Experience Replay** - Sum-tree based sampling with importance weights
+- **Multi-step Returns** - N-step bootstrapping for better credit assignment
+- **Distributional DQN** - Categorical value distributions for uncertainty modeling
 
-### 💹 Crypto Trading Integration
+### Crypto Trading Integration
 
-- **📈 Multi-asset Portfolio Management** - Dynamic allocation across crypto pairs
-- **📊 Advanced State Representation** - OHLCV, technical indicators, order book data
-- **⚖️ Risk-adjusted Rewards** - Sharpe ratio, Sortino ratio, Calmar ratio optimization
-- **💰 Transaction Cost Modeling** - Realistic fees, slippage, position sizing
-- **🛡️ Risk Management** - Stop-loss, take-profit, drawdown control
+- **Multi-asset Portfolio Management** - Dynamic allocation across crypto pairs
+- **Advanced State Representation** - OHLCV, technical indicators, order book data
+- **Risk-adjusted Rewards** - Sharpe ratio, Sortino ratio, Calmar ratio optimization
+- **Transaction Cost Modeling** - Realistic fees, slippage, position sizing
+- **Risk Management** - Stop-loss, take-profit, drawdown control
 
-### 🏗️ Enterprise Infrastructure
+### Enterprise Infrastructure
 
-- **📦 Production Monitoring** - TensorBoard, W&B, structured logging
-- **🔄 Distributed Training** - Multi-GPU, multi-process support
-- **💾 Model Versioning** - Checkpoint management, automated backups
-- **📊 Performance Analytics** - Comprehensive metrics, statistical significance testing
-- **🧪 A/B Testing** - Hyperparameter optimization, strategy comparison
+- **Production Monitoring** - TensorBoard, W&B, structured logging
+- **Distributed Training** - Multi-GPU, multi-process support
+- **Model Versioning** - Checkpoint management, automated backups
+- **Performance Analytics** - Comprehensive metrics, statistical significance testing
+- **A/B Testing** - Hyperparameter optimization, strategy comparison
 
-## 📦 Установка
+## Installation
 
-### Требования
+### Requirements
 
 - Python 3.10+
 - PyTorch 2.0+
-- CUDA (опционально)
-- 16GB+ RAM для больших моделей
+- CUDA (optional)
+- 16GB+ RAM for large models
 
 ```bash
-# Клонирование репозитория
-cd /home/vlad/ML-Framework/packages/ml-dqn
+# Clone repository
+cd /path/to/ml-dqn
 
-# Установка зависимостей
+# Install dependencies
 pip install -r requirements.txt
 
-# Установка в dev mode
+# Install in dev mode
 pip install -e .
 
-# Проверка установки
-python -c "from ml_dqn import DQN, DQNTrader; print('✅ ML-DQN установлен успешно')"
-
+# Verify installation
+python -c "from ml_dqn import DQN, DQNTrader; print('ML-DQN installed successfully')"
 ```
 
-## 🎯 Быстрый старт
+## Quick Start
 
-### 1. Базовый DQN для OpenAI Gym
+### 1. Basic DQN for OpenAI Gym
 
 ```python
 import gym
 from ml_dqn import DQN, DQNConfig, QNetworkConfig
 
-# Конфигурация сети
+# Network configuration
 network_config = QNetworkConfig(
     state_size=4,
     action_size=2,
@@ -77,7 +76,7 @@ network_config = QNetworkConfig(
     dropout_rate=0.2
 )
 
-# Конфигурация DQN
+# DQN configuration
 dqn_config = DQNConfig(
     network_config=network_config,
     learning_rate=1e-3,
@@ -88,10 +87,10 @@ dqn_config = DQNConfig(
     batch_size=32
 )
 
-# Создание агента
+# Create agent
 agent = DQN(dqn_config)
 
-# Обучение
+# Training
 env = gym.make('CartPole-v1')
 state = env.reset()
 
@@ -110,21 +109,20 @@ for episode in range(1000):
         total_reward += reward
 
     print(f"Episode {episode}, Reward: {total_reward}")
-
 ```
 
-### 2. Crypto Trading с DQNTrader
+### 2. Crypto Trading with DQNTrader
 
 ```python
 import numpy as np
 from datetime import datetime
 from ml_dqn import DQNTrader, CryptoTradingDQNConfig, MarketData, PortfolioState
 
-# Конфигурация crypto trading
+# Crypto trading configuration
 trading_config = CryptoTradingDQNConfig(
     network_config=QNetworkConfig(
-        state_size=100,  # Автоматически вычисляется
-        action_size=10,   # 5 действий × 2 символа
+        state_size=100,
+        action_size=10,
         hidden_layers=[512, 256, 128]
     ),
     trading_config=TradingEnvironmentConfig(
@@ -135,10 +133,10 @@ trading_config = CryptoTradingDQNConfig(
     )
 )
 
-# Создание trading agent
+# Create trading agent
 trader = DQNTrader(trading_config)
 
-# Симуляция торговли
+# Simulate trading
 market_data = {
     "BTCUSDT": [MarketData(
         timestamp=datetime.now(),
@@ -162,10 +160,9 @@ portfolio = PortfolioState(
     realized_pnl=0.0
 )
 
-# Выбор действия
+# Select action
 symbol, action, quantity = trader.act(market_data, portfolio, datetime.now())
 print(f"Action: {action.name} {quantity:.6f} {symbol}")
-
 ```
 
 ### 3. Rainbow DQN - All Improvements
@@ -173,7 +170,7 @@ print(f"Action: {action.name} {quantity:.6f} {symbol}")
 ```python
 from ml_dqn import RainbowDQN, RainbowDQNConfig
 
-# Rainbow configuration с всеми улучшениями
+# Rainbow configuration with all improvements
 rainbow_config = RainbowDQNConfig(
     network_config=network_config,
 
@@ -194,52 +191,49 @@ rainbow_config = RainbowDQNConfig(
     v_max=10.0
 )
 
-# Создание Rainbow agent
+# Create Rainbow agent
 rainbow = RainbowDQN(rainbow_config)
 
 print(f"Active components: {rainbow.component_usage}")
 # Output: {'double_dqn': True, 'dueling': True, 'prioritized_replay': True, ...}
-
 ```
 
-## 🏗️ Архитектура системы
+## System Architecture
 
 ```
-
 ml-dqn/
-├── 📁 src/
-│   ├── 🧠 core/                    # Core DQN implementations
-│   │   ├── dqn.py                  # Base DQN algorithm
+├── src/
+│   ├── core/                    # Core DQN implementations
+│   │   ├── dqn.py               # Base DQN algorithm
 │   │   └── __init__.py
-│   ├── 🔧 extensions/              # DQN improvements
-│   │   ├── double_dqn.py           # Double DQN
-│   │   ├── dueling_dqn.py          # Dueling DQN
-│   │   ├── noisy_dqn.py            # Noisy Networks
-│   │   └── rainbow_dqn.py          # Rainbow DQN
-│   ├── 🧪 networks/                # Neural architectures
-│   │   ├── q_network.py            # Standard Q-network
-│   │   ├── dueling_network.py      # Dueling architecture
-│   │   ├── noisy_linear.py         # Noisy layers
-│   │   └── categorical_network.py  # Distributional networks
-│   ├── 💾 buffers/                 # Experience replay
-│   │   ├── replay_buffer.py        # Standard buffer
-│   │   └── prioritized_replay.py   # PER с sum-tree
-│   ├── 🤖 agents/                  # Specialized agents
-│   │   └── dqn_trader.py           # Crypto trading agent
-│   ├── 🏋️ training/               # Training infrastructure
-│   │   └── dqn_trainer.py          # Comprehensive trainer
-│   └── 🔧 utils/                   # Utilities
-│       ├── epsilon_schedule.py     # Exploration scheduling
-│       ├── metrics.py              # Performance metrics
-│       └── visualization.py        # Training plots
-├── 🧪 tests/                       # Comprehensive tests
-├── 📚 docs/                        # Documentation
-├── 📋 requirements.txt             # Dependencies
-└── 📖 README.md                    # This file
-
+│   ├── extensions/              # DQN improvements
+│   │   ├── double_dqn.py        # Double DQN
+│   │   ├── dueling_dqn.py       # Dueling DQN
+│   │   ├── noisy_dqn.py         # Noisy Networks
+│   │   └── rainbow_dqn.py       # Rainbow DQN
+│   ├── networks/                # Neural architectures
+│   │   ├── q_network.py         # Standard Q-network
+│   │   ├── dueling_network.py   # Dueling architecture
+│   │   ├── noisy_linear.py      # Noisy layers
+│   │   └── categorical_network.py # Distributional networks
+│   ├── buffers/                 # Experience replay
+│   │   ├── replay_buffer.py     # Standard buffer
+│   │   └── prioritized_replay.py # PER with sum-tree
+│   ├── agents/                  # Specialized agents
+│   │   └── dqn_trader.py        # Crypto trading agent
+│   ├── training/                # Training infrastructure
+│   │   └── dqn_trainer.py       # Comprehensive trainer
+│   └── utils/                   # Utilities
+│       ├── epsilon_schedule.py  # Exploration scheduling
+│       ├── metrics.py           # Performance metrics
+│       └── visualization.py     # Training plots
+├── tests/                       # Comprehensive tests
+├── docs/                        # Documentation
+├── requirements.txt             # Dependencies
+└── README.md                    # This file
 ```
 
-## 🎯 Advanced Examples
+## Advanced Examples
 
 ### Multi-Environment Training
 
@@ -271,7 +265,6 @@ session = trainer.train()
 
 print(f"Best reward: {session.best_reward}")
 print(f"Total episodes: {session.total_episodes}")
-
 ```
 
 ### Hyperparameter Optimization
@@ -294,7 +287,7 @@ def objective(trial):
         buffer_size=buffer_size
     )
 
-    # Train и evaluate
+    # Train and evaluate
     agent = DQN(config)
     trainer = DQNTrainer(agent, create_env)
     session = trainer.train()
@@ -306,58 +299,9 @@ study = optuna.create_study(direction="maximize")
 study.optimize(objective, n_trials=100)
 
 print(f"Best params: {study.best_params}")
-
 ```
 
-### Custom Trading Environment
-
-```python
-from ml_dqn import DQNTrader
-import ccxt
-
-class CryptoTradingEnv:
-    def __init__(self, exchange_id='binance'):
-        self.exchange = getattr(ccxt, exchange_id)({
-            'apiKey': 'your_api_key',
-            'secret': 'your_secret',
-            'sandbox': True  # Use testnet
-        })
-
-    def get_market_data(self, symbols, timeframe='1m', limit=100):
-        market_data = {}
-
-        for symbol in symbols:
-            ohlcv = self.exchange.fetch_ohlcv(symbol, timeframe, limit=limit)
-
-            data_points = []
-            for candle in ohlcv:
-                data_points.append(MarketData(
-                    timestamp=datetime.fromtimestamp(candle[0] / 1000),
-                    symbol=symbol,
-                    open=candle[1], high=candle[2],
-                    low=candle[3], close=candle[4],
-                    volume=candle[5]
-                ))
-
-            market_data[symbol] = data_points
-
-        return market_data
-
-# Live trading integration
-env = CryptoTradingEnv()
-trader = DQNTrader(trading_config)
-
-while True:
-    market_data = env.get_market_data(["BTC/USDT", "ETH/USDT"])
-    symbol, action, quantity = trader.act(market_data, portfolio, datetime.now())
-
-    if quantity != 0:
-        print(f"Executing: {action.name} {quantity} {symbol}")
-        # Execute real trade через exchange API
-
-```
-
-## 📊 Performance Metrics
+## Performance Metrics
 
 ### Financial Metrics Support
 
@@ -373,26 +317,24 @@ for episode_id, reward, length in trading_results:
 # Get comprehensive report
 report = metrics.generate_report()
 
-print("📊 Performance Report:")
+print("Performance Report:")
 print(f"Sharpe Ratio: {report['financial_metrics']['sharpe_ratio']:.3f}")
 print(f"Max Drawdown: {report['financial_metrics']['max_drawdown']:.3f}")
 print(f"Calmar Ratio: {report['financial_metrics']['calmar_ratio']:.3f}")
 print(f"Success Rate: {report['basic_metrics']['success_rate']:.1%}")
-
 ```
 
-## 🔧 Настройка и Оптимизация
+## Configuration and Optimization
 
 ### GPU Acceleration
 
 ```python
 # Automatic device detection
-config = DQNConfig(device="auto")  # Выберет лучшее устройство
+config = DQNConfig(device="auto")
 
 # Manual device specification
 config = DQNConfig(device="cuda:0")  # Specific GPU
 config = DQNConfig(device="cpu")     # Force CPU
-
 ```
 
 ### Memory Optimization
@@ -414,27 +356,25 @@ buffer_config = ReplayBufferConfig(
     cleanup_threshold=0.9,      # Cleanup at 90% capacity
     pin_memory=True,            # Fast GPU transfer
 )
-
 ```
 
-## 🧪 Testing
+## Testing
 
 ```bash
-# Запуск всех тестов
+# Run all tests
 pytest tests/ -v
 
-# Тесты с покрытием
+# Tests with coverage
 pytest tests/ --cov=src --cov-report=html
 
-# Performance тесты
+# Performance tests
 pytest tests/test_performance.py -v --benchmark
 
-# Integration тесты
+# Integration tests
 pytest tests/test_integration.py -v --slow
-
 ```
 
-## 📈 Benchmarks
+## Benchmarks
 
 ### Performance Comparison
 
@@ -453,72 +393,62 @@ pytest tests/test_integration.py -v --slow
 | Rainbow DQN   | 980             | 6,800          | 20,500     |
 | Distributed   | 4,200           | 32,000         | 95,000     |
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
-### Общие проблемы
+### Common Issues
 
-**Q: Медленное обучение**
+**Q: Slow training**
 
 ```python
-# A: Увеличьте batch size и target update frequency
+# A: Increase batch size and target update frequency
 config.batch_size = 128
 config.target_update_freq = 2000
 
-# Используйте GPU
+# Use GPU
 config.device = "cuda"
-
 ```
 
-**Q: Нестабильные результаты**
+**Q: Unstable results**
 
 ```python
-# A: Попробуйте Double DQN и gradient clipping
+# A: Try Double DQN and gradient clipping
 config.use_double_dqn = True
 config.grad_clip_norm = 1.0
 
-# Уменьшите learning rate
+# Reduce learning rate
 config.learning_rate = 1e-4
-
 ```
 
-**Q: Переобучение на торговых данных**
+**Q: Overfitting on trading data**
 
 ```python
-# A: Используйте больше регуляризации
+# A: Use more regularization
 config.network_config.dropout_rate = 0.3
 config.weight_decay = 1e-4
 
-# Увеличьте размер replay buffer
+# Increase replay buffer size
 config.buffer_size = 200000
-
 ```
 
-## 🔮 Roadmap
+## Roadmap
 
-### Версия 1.1 (Q1 2024)
+### Version 1.1
 
-- [ ] **Recurrent DQN** - LSTM/GRU для sequential dependencies
+- [ ] **Recurrent DQN** - LSTM/GRU for sequential dependencies
 - [ ] **Quantile Regression DQN** - Full distributional learning
 - [ ] **Hindsight Experience Replay** - Learning from failures
 - [ ] **Multi-agent DQN** - Cooperative/competitive training
 
-### Версия 1.2 (Q2 2024)
+### Version 1.2
 
 - [ ] **Transformer-based DQN** - Attention mechanisms
 - [ ] **Model-based Planning** - Dyna-Q integration
 - [ ] **Continuous Control** - DDPG/TD3 compatibility
 - [ ] **Meta-learning** - Few-shot adaptation
 
-### Версия 1.3 (Q3 2024)
+## Contributing
 
-- [ ] **Federated Learning** - Distributed private training
-- [ ] **Causal Inference** - Intervention-based learning
-- [ ] **Explainable AI** - Interpretability tools
-- [ ] **AutoML Integration** - Neural architecture search
-
-## 🤝 Contributing
-
-Мы приветствуем contributions! Пожалуйста, прочитайте [CONTRIBUTING.md](CONTRIBUTING.md) для деталей.
+We welcome contributions! Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
 ### Development Setup
 
@@ -532,51 +462,26 @@ pytest tests/ --cov=src
 black src/ tests/
 isort src/ tests/
 mypy src/
-
 ```
 
-## 📄 License
+## License
 
-Этот проект использует MIT License. См. [LICENSE](LICENSE) файл для деталей.
+This project uses MIT License. See [LICENSE](LICENSE) file for details.
 
-## 📞 Support
+## Citation
 
-- **GitHub Issues**: [ml-dqn/issues](https://github.com/ml-framework/ml-dqn/issues)
-- **Discord**: [ML-Framework Community](https://discord.gg/ml-framework)
-- **Email**: <support@ml-framework.ai>
-- **Documentation**: [ml-dqn.readthedocs.io](https://ml-dqn.readthedocs.io)
-
-## 🙏 Acknowledgments
-
-- **DeepMind** - Original DQN paper и Rainbow improvements
-- **OpenAI** - Baseline implementations и Gym environments
-- **Stable Baselines3** - Reference implementations
-- **PyTorch** - Deep learning framework
-- **Context7** - Enterprise architecture patterns
-
-## 📚 Citation
-
-Если вы используете ML-DQN в исследованиях, пожалуйста, цитируйте:
+If you use ML-DQN in research, please cite:
 
 ```bibtex
 @software{ml_dqn_2024,
   author = {ML-Framework Development Team},
-  title = {ML-DQN: Enterprise Deep Q-Network для Криптотрейдинга},
+  title = {ML-DQN: Enterprise Deep Q-Network for Crypto Trading},
   year = {2024},
   url = {https://github.com/ml-framework/ml-dqn},
   version = {1.0.0}
 }
-
 ```
 
 ---
 
-<div align="center">
-
-**🚀 Built with ❤️ by the ML-Framework Team**
-
-[🌟 Star us on GitHub](https://github.com/ml-framework/ml-dqn) •
-[📖 Read the Docs](https://ml-dqn.readthedocs.io) •
-[💬 Join Discord](https://discord.gg/ml-framework)
-
-</div>
+**Built with care by the ML-Framework Team**
