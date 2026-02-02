@@ -1,4 +1,4 @@
-"""Training infrastructure для DQN."""
+"""Training infrastructure for DQN."""
 
 from .dqn_trainer import DQNTrainer
 

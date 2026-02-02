@@ -1,4 +1,4 @@
-"""Core DQN алгоритмы и компоненты."""
+"""Core DQN algorithms and components."""
 
 from .dqn import DQN
 
