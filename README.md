@@ -488,3 +488,7 @@ If you use ML-DQN in research, please cite:
 ---
 
 **Built with care by the ML-Framework Team**
+
+## Support
+
+For questions and support, please open an issue on GitHub.
