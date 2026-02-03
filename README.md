@@ -1,5 +1,8 @@
 # ML-DQN: Enterprise Deep Q-Network for Crypto Trading
 
+[![CI](https://github.com/KeepALifeUS/ml-dqn/actions/workflows/ci.yml/badge.svg)](https://github.com/KeepALifeUS/ml-dqn/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 > **Production-Ready DQN Implementation with Enterprise Patterns**
 
 Comprehensive Deep Q-Network (DQN) implementation and its improvements for cryptocurrency trading with enterprise-grade functionality, including all modern advances in Deep Reinforcement Learning.
